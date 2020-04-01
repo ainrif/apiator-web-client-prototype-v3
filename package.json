@@ -1,0 +1,29 @@
+{
+  "name": "apiator-web-client-v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ainrif/apiator-web-client-prototype-v3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ainrif/apiator-web-client-prototype-v3/issues"
+  },
+  "homepage": "https://github.com/ainrif/apiator-web-client-prototype-v3#readme",
+  "devDependencies": {
+    "rollup": "^2.3.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-svelte": "^5.2.0",
+    "size-limit": "^4.4.2",
+    "svelte": "^3.20.1"
+  }
+}
