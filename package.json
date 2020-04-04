@@ -18,6 +18,13 @@
   },
   "homepage": "https://github.com/ainrif/apiator-web-client-prototype-v3#readme",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "prettier": "^2.0.2",
+    "prettier-plugin-svelte": "^0.7.0",
     "rollup": "^2.3.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
