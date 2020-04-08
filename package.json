@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "start": "rollup -c -w",
-        "test": "jest --no-cache"
+        "test": "npm run size && jest --no-cache",
+        "size": "npm run build && size-limit",
+        "build": "rollup -c"
     },
     "repository": {
         "type": "git",
@@ -19,6 +21,7 @@
     "homepage": "https://github.com/ainrif/apiator-web-client-prototype-v3#readme",
     "devDependencies": {
         "@babel/preset-env": "^7.9.0",
+        "@size-limit/preset-app": "^4.4.5",
         "@testing-library/dom": "^7.2.0",
         "@testing-library/jest-dom": "^5.3.0",
         "@testing-library/svelte": "^3.0.0",
@@ -40,5 +43,11 @@
         "rollup-plugin-svelte": "^5.2.0",
         "size-limit": "^4.4.2",
         "svelte": "^3.20.1"
-    }
+    },
+    "size-limit": [
+        {
+            "limit": "1 s",
+            "path": "public/build/*.js"
+        }
+    ]
 }
