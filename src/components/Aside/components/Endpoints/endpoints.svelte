@@ -1,5 +1,5 @@
 <script>
-    export let endpoints;
+    import { endpoints } from '../../../../Stores/index';
 </script>
 
 <style>
@@ -52,7 +52,7 @@
 
 <div class="endpoints">
     <ul class="endpoints-list">
-        {#each endpoints as endpoint}
+        {#each $endpoints as endpoint}
             <li class="endpoints-item">
                 <span class="endpoints-title">{endpoint.apiPath}</span>
                 <ul class="endpoints-methods">
