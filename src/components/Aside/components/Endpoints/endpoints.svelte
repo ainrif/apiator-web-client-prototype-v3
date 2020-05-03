@@ -3,16 +3,30 @@
 </script>
 
 <style>
+    ul {
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+        padding-inline-start: 15px;
+    }
+
+    .endpoints {
+        margin: var(--S-margin) 0;
+    }
+
     .endpoints-title {
         color: var(--main-white);
     }
 
     .endpoints-list {
+        line-height: 20px;
         list-style: none;
+
+        padding-inline-start: 0px;
     }
 
     .endpoints-methods {
         list-style: none;
+        font-weight: bold;
     }
 
     .endpoints-method-get {
