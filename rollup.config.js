@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
+import image from '@rollup/plugin-image';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -21,6 +22,7 @@ export default {
         }),
         resolve(),
         commonjs(),
+        image(),
         !production &&
             serve({
                 contentBase: 'public',
