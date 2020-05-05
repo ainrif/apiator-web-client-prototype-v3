@@ -2,6 +2,7 @@
     import Header from './components/Header/header.svelte';
     import Search from './components/Search/search.svelte';
     import Endpoints from './components/Endpoints/endpoints.svelte';
+    import Types from './components/Types/types.svelte';
 </script>
 
 <style>
@@ -33,5 +34,6 @@
     </div>
     <div class="section">
         <span class="section-title">Model</span>
+        <Types />
     </div>
 </aside>

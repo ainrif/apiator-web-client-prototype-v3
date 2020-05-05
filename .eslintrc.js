@@ -7,6 +7,7 @@ module.exports = {
     env: {
         browser: true,
         commonjs: true,
+        'jest/globals': true,
         es6: true,
     },
     globals: {

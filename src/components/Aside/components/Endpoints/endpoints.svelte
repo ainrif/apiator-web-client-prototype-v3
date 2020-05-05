@@ -29,6 +29,10 @@
         font-weight: bold;
     }
 
+    .endpoints-method {
+        cursor: pointer;
+    }
+
     .endpoints-method-get {
         color: var(--main-cyan);
     }
