@@ -30,6 +30,27 @@
 
     .workspace-selected {
         color: var(--main-white);
+        margin: 12px 17px;
+    }
+
+    .endpoints-method-get {
+        color: var(--main-cyan);
+    }
+
+    .endpoints-method-post {
+        color: var(--main-green);
+    }
+
+    .endpoints-method-put {
+        color: var(--main-orange);
+    }
+
+    .endpoints-method-delete {
+        color: var(--main-red);
+    }
+
+    .endpoints-method-admin {
+        color: var(--main-blue);
     }
 </style>
 
@@ -37,6 +58,11 @@
     {#if endpoint === null}
         <img class="workspace-logo" src={workspaceLogo} alt="logotype" />
     {:else}
-        <div class="workspace-selected">{endpoint.description}</div>
+        <div class="workspace-selected">
+            <h1 class="endpoints-method-{endpoint.method.toLowerCase()}">
+                {endpoint.method} {endpoint.path}
+            </h1>
+            {#if endpoint.description}{endpoint.description}{/if}
+        </div>
     {/if}
 </div>
