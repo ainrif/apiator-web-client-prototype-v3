@@ -1,8 +1,9 @@
-<script>
-    import { endpoints } from '../../../../Stores/endpoints';
-    import { selectedEndpoint } from '../../../../Stores/selected-endpoint';
+<script lang="typescript">
+    import { repository } from '../../../../repository';
 
-    function handleClick(event) {
+    const { endpoints, selectEndpoint } = repository();
+
+    function handleClick(event: any) {
         if (event.target.classList.contains('endpoints-method')) {
             const name = event.target.dataset.name;
             const endpointIndex = event.target.dataset.endpointIndex;
@@ -11,7 +12,7 @@
 
             for (let i = 0; i < selectedApi.length; i++) {
                 if (selectedApi[i].name === name) {
-                    selectedEndpoint.set(selectedApi[i]);
+                    selectEndpoint(selectedApi[i]);
 
                     break;
                 }
@@ -22,8 +23,8 @@
 
 <style>
     ul {
-        margin-block-start: 0px;
-        margin-block-end: 0px;
+        margin-block-start: 0;
+        margin-block-end: 0;
         padding-inline-start: 15px;
     }
 

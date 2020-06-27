@@ -1,5 +1,5 @@
 module.exports = {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 2019,
         sourceType: 'module',
@@ -14,12 +14,13 @@ module.exports = {
         jest: true,
         test: true,
     },
-    plugins: ['svelte3', 'prettier', 'testing-library', 'jest'],
+    plugins: ['svelte3', 'prettier', 'testing-library', 'jest', '@typescript-eslint'],
     extends: [
         'eslint:recommended',
         'prettier',
-        'plugin:prettier/recommended',
         'plugin:testing-library/recommended',
+        'plugin:prettier/recommended',
+        'prettier/@typescript-eslint',
     ],
     rules: {
         'testing-library/await-async-query': 'error',

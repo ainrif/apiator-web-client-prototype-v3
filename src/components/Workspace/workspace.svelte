@@ -1,17 +1,9 @@
-<script>
+<script lang="typescript">
+    import { repository } from '../../repository';
     import workspaceLogo from './workspace-logo.svg';
+    import Card from './components/Card/card.svelte';
 
-    import { selectedEndpoint } from '../../Stores/selected-endpoint';
-
-    let endpoint = null;
-
-    selectedEndpoint.subscribe(selected => {
-        if (selected === null) {
-            return;
-        }
-
-        endpoint = selected;
-    });
+    const { selectedEndpoint } = repository();
 </script>
 
 <style>
@@ -55,14 +47,20 @@
 </style>
 
 <div class="workspace">
-    {#if endpoint === null}
+    {#if selectedEndpoint === null}
         <img class="workspace-logo" src={workspaceLogo} alt="logotype" />
     {:else}
         <div class="workspace-selected">
-            <h1 class="endpoints-method-{endpoint.method.toLowerCase()}">
-                {endpoint.method} {endpoint.path}
+            <h1 class="selectedEndpoints-method-{selectedEndpoint.method.toLowerCase()}">
+                {selectedEndpoint.method} {selectedEndpoint.path}
             </h1>
-            {#if endpoint.description}{endpoint.description}{/if}
+            {#if selectedEndpoint.description}{selectedEndpoint.description}{/if}
+            {#each selectedEndpoint.params as param}
+                <Card
+                    HTTPParameterType={param.httpParamType}
+                    parameterName={param.name}
+                    parameterDataType={param.modelType} />
+            {/each}
         </div>
     {/if}
 </div>

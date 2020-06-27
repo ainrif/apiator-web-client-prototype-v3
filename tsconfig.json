@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": ["svelte"]
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules/*"]
+}
