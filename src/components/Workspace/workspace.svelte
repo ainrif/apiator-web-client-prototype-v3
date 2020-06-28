@@ -1,5 +1,5 @@
-<script lang="typescript">
-    import { repository } from '../../repository';
+<script>
+    import { repository } from '../../repository.ts';
     import workspaceLogo from './workspace-logo.svg';
     import Card from './components/Card/card.svelte';
 
@@ -47,15 +47,15 @@
 </style>
 
 <div class="workspace">
-    {#if selectedEndpoint === null}
+    {#if $selectedEndpoint === null}
         <img class="workspace-logo" src={workspaceLogo} alt="logotype" />
     {:else}
         <div class="workspace-selected">
-            <h1 class="selectedEndpoints-method-{selectedEndpoint.method.toLowerCase()}">
-                {selectedEndpoint.method} {selectedEndpoint.path}
+            <h1 class="$selectedEndpoints-method-{$selectedEndpoint.method.toLowerCase()}">
+                {$selectedEndpoint.method} {$selectedEndpoint.path}
             </h1>
-            {#if selectedEndpoint.description}{selectedEndpoint.description}{/if}
-            {#each selectedEndpoint.params as param}
+            {#if $selectedEndpoint.description}{$selectedEndpoint.description}{/if}
+            {#each $selectedEndpoint.params as param}
                 <Card
                     HTTPParameterType={param.httpParamType}
                     parameterName={param.name}

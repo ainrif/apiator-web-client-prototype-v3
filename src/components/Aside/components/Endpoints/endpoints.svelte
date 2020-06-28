@@ -1,9 +1,9 @@
-<script lang="typescript">
-    import { repository } from '../../../../repository';
+<script>
+    import { repository } from '../../../../repository.ts';
 
     const { endpoints, selectEndpoint } = repository();
 
-    function handleClick(event: any) {
+    function handleClick(event) {
         if (event.target.classList.contains('endpoints-method')) {
             const name = event.target.dataset.name;
             const endpointIndex = event.target.dataset.endpointIndex;
