@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import image from '@rollup/plugin-image';
 import json from '@rollup/plugin-json';
+import typescript from 'rollup-plugin-typescript2';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -21,10 +22,11 @@ export default {
                 css.write('public/build/bundle.css');
             },
         }),
-        resolve(),
-        commonjs(),
         image(),
+        commonjs(),
+        resolve(),
         json(),
+        typescript(),
         !production &&
             serve({
                 contentBase: 'public',

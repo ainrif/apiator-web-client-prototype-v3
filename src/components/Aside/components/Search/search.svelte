@@ -8,16 +8,17 @@
     }
 
     .search-input {
+        text-indent: 12px;
         height: 35px;
         width: 100%;
         border-width: 0px;
         padding: 0;
         margin: 0;
         background: #424d57;
-    }
 
-    .search-input::placeholder {
-        padding-left: 12px;
+        outline: none;
+        caret-color: var(--main-white);
+        color: var(--main-white);
     }
 
     .search-input::value {

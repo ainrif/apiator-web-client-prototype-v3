@@ -1,11 +1,30 @@
 <script>
-    import { endpoints } from '../../../../Stores/index';
+    import { repository } from '../../../../repository.ts';
+
+    const { endpoints, selectEndpoint } = repository();
+
+    function handleClick(event) {
+        if (event.target.classList.contains('endpoints-method')) {
+            const name = event.target.dataset.name;
+            const endpointIndex = event.target.dataset.endpointIndex;
+
+            const selectedApi = $endpoints[endpointIndex].apiEndpoints;
+
+            for (let i = 0; i < selectedApi.length; i++) {
+                if (selectedApi[i].name === name) {
+                    selectEndpoint(selectedApi[i]);
+
+                    break;
+                }
+            }
+        }
+    }
 </script>
 
 <style>
     ul {
-        margin-block-start: 0px;
-        margin-block-end: 0px;
+        margin-block-start: 0;
+        margin-block-end: 0;
         padding-inline-start: 15px;
     }
 
@@ -27,6 +46,10 @@
     .endpoints-methods {
         list-style: none;
         font-weight: bold;
+    }
+
+    .endpoints-method {
+        cursor: pointer;
     }
 
     .endpoints-method-get {
@@ -51,13 +74,15 @@
 </style>
 
 <div class="endpoints">
-    <ul class="endpoints-list">
-        {#each $endpoints as endpoint}
+    <ul class="endpoints-list" on:click={handleClick}>
+        {#each $endpoints as endpoint, index}
             <li class="endpoints-item">
                 <span class="endpoints-title">{endpoint.apiPath}</span>
                 <ul class="endpoints-methods">
                     {#each endpoint.apiEndpoints as entry}
                         <li
+                            data-name={entry.name}
+                            data-endpoint-index={index}
                             class="endpoints-method endpoints-method-{entry.method.toLowerCase()}">
                             {entry.method} {entry.path}
                         </li>
