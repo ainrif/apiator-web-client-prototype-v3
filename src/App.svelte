@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Aside from './components/Aside/aside.svelte';
     import Workspace from './components/Workspace/workspace.svelte';
 
@@ -16,6 +16,7 @@
         --main-white: #c7cdd2;
         --main-red: #e77e7f;
         --main-orange: #e0a680;
+        --main-yellow: #fae2a8;
         --main-cyan: #0e8181;
         --main-green: #55a574;
         --main-blue: #a6bfd9;

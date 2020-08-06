@@ -1,9 +1,9 @@
-<script>
-    import { repository } from '../../repository.ts';
+<script lang="ts">
+    import { selectedEndpoint } from '../../repository';
+
+    // @ts-ignore
     import workspaceLogo from './workspace-logo.svg';
     import Card from './components/Card/card.svelte';
-
-    const { selectedEndpoint } = repository();
 </script>
 
 <style>
@@ -51,15 +51,20 @@
         <img class="workspace-logo" src={workspaceLogo} alt="logotype" />
     {:else}
         <div class="workspace-selected">
-            <h1 class="$selectedEndpoints-method-{$selectedEndpoint.method.toLowerCase()}">
+            <h1
+                class="$selectedEndpoints-method-{$selectedEndpoint.method.toLowerCase()}">
                 {$selectedEndpoint.method} {$selectedEndpoint.path}
             </h1>
-            {#if $selectedEndpoint.description}{$selectedEndpoint.description}{/if}
+            {#if $selectedEndpoint.description}
+                {$selectedEndpoint.description}
+            {/if}
+            <span>URL parameters</span>
             {#each $selectedEndpoint.params as param}
                 <Card
-                    HTTPParameterType={param.httpParamType}
-                    parameterName={param.name}
-                    parameterDataType={param.modelType} />
+                    name={param.name}
+                    type={param.httpParamType}
+                    modelType={param.modelType}
+                    defaultValue={param.defaultValue} />
             {/each}
         </div>
     {/if}

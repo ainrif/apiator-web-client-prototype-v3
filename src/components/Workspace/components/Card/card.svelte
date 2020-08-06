@@ -1,17 +1,21 @@
 <script>
-    /** @todo: Fix size of card (shouldn't be hardcoded) */
+    export let type;
+    export let name;
+    export let modelType;
+    export let defaultValue;
 
-    export let HTTPParameterType;
-    export let parameterName;
-    export let parameterDataType;
+    // $: const { httpParamType, name, modelType, defaultValue } = param;
 </script>
 
 <style>
     .card {
         padding: 8px;
         width: 460px;
-        height: 150px;
         background-color: var(--blocks-bg-color);
+    }
+
+    .parameter {
+        font-size: var(--font-size);
     }
 
     .card-parameter-type {
@@ -21,13 +25,28 @@
     .parameter-name {
         color: var(--main-white);
     }
+
+    .parameter-datatype {
+        color: var(--main-yellow);
+    }
+
+    .parameter-value {
+        text-decoration: underline;
+    }
 </style>
 
 <div class="card">
-    <span class="card-parameter-type">{HTTPParameterType}</span>
+    <span class="card-parameter-type">{type}</span>
     <div class="parameter">
-        <span class="parameter-name">{parameterName}</span>
+        <span class="parameter-name">{name}</span>
         :
-        <span class="parameter-datatype">{parameterDataType}</span>
+        <span class="parameter-datatype">{modelType}</span>
+        <span class="parameter-value">
+            {#if defaultValue}
+                {defaultValue}
+            {:else}
+                No default value
+            {/if}
+        </span>
     </div>
 </div>
