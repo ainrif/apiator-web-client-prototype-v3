@@ -1,18 +1,20 @@
 <script lang="ts">
     import { endpoints, selectEndpoint } from '../../../../repository';
 
-    function handleClick(event) {
-        if (event.target.classList.contains('endpoints-method')) {
-            const name = event.target.dataset.name;
-            const endpointIndex = event.target.dataset.endpointIndex;
+    function handleClick(event: any) {
+        if (event) {
+            if (event.target.classList.contains('endpoints-method')) {
+                const name = event.target.dataset.name;
+                const endpointIndex = event.target.dataset.endpointIndex;
 
-            const selectedApi = $endpoints[endpointIndex].apiEndpoints;
+                const selectedApi = $endpoints[endpointIndex].apiEndpoints;
 
-            for (let i = 0; i < selectedApi.length; i++) {
-                if (selectedApi[i].name === name) {
-                    selectEndpoint(selectedApi[i]);
+                for (let i = 0; i < selectedApi.length; i++) {
+                    if (selectedApi[i].name === name) {
+                        selectEndpoint(selectedApi[i]);
 
-                    break;
+                        break;
+                    }
                 }
             }
         }
