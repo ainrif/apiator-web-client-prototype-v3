@@ -4,8 +4,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import serve from 'rollup-plugin-serve';
 import image from '@rollup/plugin-image';
 import json from '@rollup/plugin-json';
-import typescript from 'rollup-plugin-typescript2';
+import autoPreprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
 
+// eslint-disable-next-line no-undef
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -21,12 +23,13 @@ export default {
             css: (css) => {
                 css.write('public/build/bundle.css');
             },
+            preprocess: autoPreprocess(),
         }),
         image(),
         commonjs(),
         resolve(),
         json(),
-        typescript(),
+        typescript({ sourceMap: !production }),
         !production &&
             serve({
                 contentBase: 'public',

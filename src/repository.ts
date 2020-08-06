@@ -2,13 +2,14 @@
 import { readable, Readable, writable, Writable } from 'svelte/store';
 import data from './endpoints-stub.json';
 
-type Param = {
+export type Param = {
     basedOn: any[];
     httpParamType: string;
     index: number;
     modelType: string;
     name?: string;
     optional: boolean;
+    defaultValue?: any;
 };
 
 type ReturnValue = {
@@ -55,5 +56,6 @@ function createRepository<T extends Endpoint, C extends Context<T>>({
         };
     };
 }
-
-export const repository = createRepository(data);
+export const { selectedEndpoint, selectEndpoint, endpoints } = createRepository(
+    data
+)();

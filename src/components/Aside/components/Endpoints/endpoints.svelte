@@ -1,7 +1,5 @@
-<script>
-    import { repository } from '../../../../repository.ts';
-
-    const { endpoints, selectEndpoint } = repository();
+<script lang="ts">
+    import { endpoints, selectEndpoint } from '../../../../repository';
 
     function handleClick(event) {
         if (event.target.classList.contains('endpoints-method')) {
