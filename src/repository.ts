@@ -9,6 +9,7 @@ export type Param = {
     modelType: string;
     name?: string;
     optional: boolean;
+    deprecated?: boolean;
     defaultValue?: any;
 };
 

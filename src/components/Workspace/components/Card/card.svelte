@@ -3,8 +3,8 @@
     export let name;
     export let modelType;
     export let defaultValue;
-
-    // $: const { httpParamType, name, modelType, defaultValue } = param;
+    export let optional;
+    export let deprecated;
 </script>
 
 <style>
@@ -16,6 +16,8 @@
 
     .parameter {
         font-size: var(--font-size);
+
+        margin-top: var(--L-margin);
     }
 
     .card-parameter-type {
@@ -42,11 +44,11 @@
         :
         <span class="parameter-datatype">{modelType}</span>
         <span class="parameter-value">
-            {#if defaultValue}
-                {defaultValue}
-            {:else}
-                No default value
-            {/if}
+            {#if defaultValue}{defaultValue}{:else}No default value{/if}
         </span>
+        <details>
+            <summary>Description</summary>
+            optional: {optional} deprecated: {deprecated}
+        </details>
     </div>
 </div>

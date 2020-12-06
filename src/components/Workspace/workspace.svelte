@@ -1,14 +1,31 @@
 <script lang="ts">
     import { selectedEndpoint } from '../../repository';
+    import { paramsParser } from './params-parser';
+
+    import Card from './components/Card/card.svelte';
 
     // @ts-ignore
     import workspaceLogo from './workspace-logo.svg';
-    import Card from './components/Card/card.svelte';
+
+    let parsedParams;
+
+    $: parsedParams = $selectedEndpoint ? paramsParser($selectedEndpoint.params) : [];
 </script>
 
 <style>
     .workspace {
         position: relative;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .params {
+        font-size: 12px;
+        color: var(--main-gray);
+
+        margin-bottom: 12px;
     }
 
     .workspace-logo {
@@ -52,19 +69,24 @@
     {:else}
         <div class="workspace-selected">
             <h1
-                class="$selectedEndpoints-method-{$selectedEndpoint.method.toLowerCase()}">
+                class="title endpoints-method-{$selectedEndpoint.method.toLowerCase()}">
                 {$selectedEndpoint.method} {$selectedEndpoint.path}
             </h1>
             {#if $selectedEndpoint.description}
                 {$selectedEndpoint.description}
             {/if}
-            <span>URL parameters</span>
-            {#each $selectedEndpoint.params as param}
-                <Card
-                    name={param.name}
-                    type={param.httpParamType}
-                    modelType={param.modelType}
-                    defaultValue={param.defaultValue} />
+            <h2 class="params">URL parameters</h2>
+            {#each [...parsedParams] as [paramType, value]}
+                {#each value as {name, modelType, defaultValue, optional, deprecated}}
+                    <Card
+                        name={name}
+                        type={paramType}
+                        modelType={modelType}
+                        defaultValue={defaultValue}
+                        optional={optional ? optional : false}
+                        deprecated={deprecated ? deprecated : false}
+                    />
+                {/each}
             {/each}
         </div>
     {/if}
