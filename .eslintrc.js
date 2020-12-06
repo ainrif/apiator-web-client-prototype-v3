@@ -8,13 +8,20 @@ module.exports = {
         browser: true,
         commonjs: true,
         es6: true,
+        jest: true,
     },
     globals: {
         expect: true,
         jest: true,
         test: true,
     },
-    plugins: ['svelte3', 'prettier', 'testing-library', 'jest', '@typescript-eslint'],
+    plugins: [
+        'svelte3',
+        'prettier',
+        'testing-library',
+        'jest',
+        '@typescript-eslint',
+    ],
     extends: [
         'eslint:recommended',
         'prettier',

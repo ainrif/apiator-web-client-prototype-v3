@@ -6,7 +6,7 @@
         "strictNullChecks": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "types": ["svelte"]
+        "types": ["svelte", "jest"]
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules/*"]
