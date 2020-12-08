@@ -4,9 +4,21 @@
     import Endpoints from './components/Endpoints/endpoints.svelte';
 </script>
 
+<aside class="aside">
+    <Header />
+    <Search />
+
+    <div class="section">
+        <span class="section-title">ENDPOINTS</span>
+        <Endpoints />
+    </div>
+    <div class="section">
+        <span class="section-title">Model</span>
+    </div>
+</aside>
+
 <style>
     .aside {
-        height: 100vh;
         background-color: var(--blocks-bg-color);
         font-size: var(--font-size);
         border-right: 1px solid var(--border-color);
@@ -22,16 +34,3 @@
         font-weight: bold;
     }
 </style>
-
-<aside class="aside">
-    <Header />
-    <Search />
-
-    <div class="section">
-        <span class="section-title">ENDPOINTS</span>
-        <Endpoints />
-    </div>
-    <div class="section">
-        <span class="section-title">Model</span>
-    </div>
-</aside>
