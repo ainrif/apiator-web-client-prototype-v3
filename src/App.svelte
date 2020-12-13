@@ -12,6 +12,7 @@
         margin: 0 0;
         --workspace-bg-color: #22262a;
         --blocks-bg-color: #161a1d;
+        --active-endpoint-color: #09d3ac;
         --main-gray: #778188;
         --main-white: #c7cdd2;
         --main-red: #e77e7f;

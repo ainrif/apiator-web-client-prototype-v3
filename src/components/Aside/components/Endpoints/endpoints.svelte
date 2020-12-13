@@ -1,5 +1,9 @@
 <script lang="ts">
-import { endpoints, selectEndpoint } from '../../../../repository';
+import {
+    endpoints,
+    selectEndpoint,
+    selectedEndpoint,
+} from '../../../../repository';
 
 function handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -24,7 +28,11 @@ function handleClick(event: MouseEvent) {
     }
 }
 
-$: console.log($endpoints);
+let activeEndpointIdentifier: string;
+
+$: activeEndpointIdentifier = $selectedEndpoint
+    ? `${$selectedEndpoint!.endpoint.method}${$selectedEndpoint!.endpoint.path}`
+    : '';
 </script>
 
 <div class="endpoints">
@@ -38,6 +46,7 @@ $: console.log($endpoints);
                             data-name="{entry.name}"
                             data-context-index="{index}"
                             class="endpoints-method endpoints-method-{entry.method.toLowerCase()}"
+                            class:active="{activeEndpointIdentifier === `${entry.method}${entry.path}`}"
                             title="{`${entry.method}${entry.path}`}"
                         >
                             {entry.method}
@@ -73,6 +82,12 @@ ul {
     margin: var(--S-margin) 0;
 }
 
+.active {
+    color: var(--active-endpoint-color) !important;
+
+    text-decoration: underline;
+}
+
 .endpoints-title {
     color: var(--main-white);
 }
@@ -98,6 +113,8 @@ ul {
     margin-top: var(--XS-margin);
 
     cursor: pointer;
+
+    transition: color 0.2s;
 }
 
 .endpoints-method-get {
