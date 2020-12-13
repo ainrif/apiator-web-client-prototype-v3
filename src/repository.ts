@@ -18,12 +18,13 @@ type ReturnValue = {
     modelType: string;
 };
 
-type Endpoint = {
+export type Endpoint = {
     method: string;
     name: string;
     params: Param[];
     path: string;
     returnType?: ReturnValue;
+    description?: string;
 };
 
 type Context<T> = {
@@ -36,27 +37,41 @@ type RepositoryAPI<T, C> = {
     endpoints: Readable<C[]>;
     selectedEndpoint: Writable<T | null>;
     selectEndpoint: (endpoint: T) => void;
+    updateEndpoints: (filter: (endpoints: C[]) => C[]) => void;
 };
 
 type Data<C> = {
     apiContexts: C[];
 };
 
-function createRepository<T extends Endpoint, C extends Context<T>>({
-    apiContexts,
-}: Data<C>): () => RepositoryAPI<T, C> {
+type Selected<T extends Endpoint> = {
+    endpoint: T;
+    apiPath: string;
+};
+
+function createRepository<
+    T extends Selected<Endpoint>,
+    C extends Context<Endpoint>
+>({ apiContexts }: Data<C>): () => RepositoryAPI<T, C> {
     const selectedEndpoint = writable<T | null>(null);
     const selectEndpoint = (endpoint: T) => selectedEndpoint.set(endpoint);
-    const endpoints = readable(apiContexts, () => {});
+    const endpoints = writable<C[]>(apiContexts);
+    const updateEndpoints = (filter: (apiContexts: C[]) => C[]) => {
+        endpoints.set(filter(apiContexts));
+    };
 
     return () => {
         return {
             selectedEndpoint,
             selectEndpoint,
             endpoints,
+            updateEndpoints,
         };
     };
 }
-export const { selectedEndpoint, selectEndpoint, endpoints } = createRepository(
-    data
-)();
+export const {
+    selectedEndpoint,
+    selectEndpoint,
+    endpoints,
+    updateEndpoints,
+} = createRepository(productionData)();

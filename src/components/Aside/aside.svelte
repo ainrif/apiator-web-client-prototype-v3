@@ -1,7 +1,7 @@
 <script>
-    import Header from './components/Header/header.svelte';
-    import Search from './components/Search/search.svelte';
-    import Endpoints from './components/Endpoints/endpoints.svelte';
+import Header from './components/Header/header.svelte';
+import Search from './components/Search/search.svelte';
+import Endpoints from './components/Endpoints/endpoints.svelte';
 </script>
 
 <aside class="aside">
@@ -12,25 +12,25 @@
         <span class="section-title">ENDPOINTS</span>
         <Endpoints />
     </div>
-    <div class="section">
-        <span class="section-title">Model</span>
-    </div>
+    <div class="section"><span class="section-title">Model</span></div>
 </aside>
 
 <style>
-    .aside {
-        background-color: var(--blocks-bg-color);
-        font-size: var(--font-size);
-        border-right: 1px solid var(--border-color);
-    }
+.aside {
+    min-height: 100vh;
 
-    .section {
-        margin-top: var(--L-margin);
-        margin-left: var(--L-margin);
-    }
+    background-color: var(--blocks-bg-color);
+    font-size: var(--font-size);
+    border-right: 1px solid var(--border-color);
+}
 
-    .section-title {
-        color: var(--main-gray);
-        font-weight: bold;
-    }
+.section {
+    margin-top: var(--L-margin);
+    margin-left: var(--L-margin);
+}
+
+.section-title {
+    color: var(--main-gray);
+    font-weight: bold;
+}
 </style>
