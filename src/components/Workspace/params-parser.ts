@@ -2,7 +2,7 @@
 import type { Param } from '../../repository';
 
 type AvailableParamTypes = 'QUERY' | 'PATH' | 'BODY';
-type ParsedParam = {
+export type ParsedParam = {
     name: string;
     modelType: string;
     defaultValue?: string;
@@ -12,7 +12,7 @@ type ParsedParam = {
     basedOn: any[]; // @todo: Clarify type
 };
 
-type ParsedParams<V extends ParsedParam> = Map<AvailableParamTypes, V[]>;
+export type ParsedParams<V extends ParsedParam> = Map<AvailableParamTypes, V[]>;
 
 export const paramsParser = <P extends Param, R extends ParsedParam>(
     rowParams: P[]

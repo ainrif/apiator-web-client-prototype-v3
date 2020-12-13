@@ -1,40 +1,47 @@
 <script lang="ts">
-    import { endpoints, selectEndpoint } from '../../../../repository';
+import { endpoints, selectEndpoint } from '../../../../repository';
 
-    function handleClick(event: MouseEvent) {
-        const target = event.target as HTMLElement;
+function handleClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
 
-        if (
-            target.classList.contains('endpoints-method')
-        ) {
-            const name = target.dataset.name;
-            const endpointIndex = target.dataset.endpointIndex as unknown as number;
+    if (target.classList.contains('endpoints-method')) {
+        const name = target.dataset.name;
+        const apiContextIndex = (target.dataset
+            .contextIndex as unknown) as number;
 
-            const selectedApi = $endpoints[endpointIndex].apiEndpoints;
+        const selectedApi = $endpoints[apiContextIndex].apiEndpoints;
 
-            for (let i = 0; i < selectedApi.length; i++) {
-                if (selectedApi[i].name === name) {
-                    selectEndpoint(selectedApi[i]);
+        for (let i = 0; i < selectedApi.length; i++) {
+            if (selectedApi[i].name === name) {
+                selectEndpoint({
+                    endpoint: selectedApi[i],
+                    apiPath: $endpoints[apiContextIndex].apiPath,
+                });
 
-                    break;
-                }
+                break;
             }
         }
     }
+}
+
+$: console.log($endpoints);
 </script>
 
 <div class="endpoints">
-    <ul class="endpoints-list" on:click={handleClick}>
+    <ul class="endpoints-list" on:click="{handleClick}">
         {#each $endpoints as endpoint, index}
             <li class="endpoints-item">
                 <span class="endpoints-title">{endpoint.apiPath}</span>
                 <ul class="endpoints-methods">
                     {#each endpoint.apiEndpoints as entry}
                         <li
-                            data-name={entry.name}
-                            data-endpoint-index={index}
-                            class="endpoints-method endpoints-method-{entry.method.toLowerCase()}">
-                            {entry.method}   {entry.path}
+                            data-name="{entry.name}"
+                            data-context-index="{index}"
+                            class="endpoints-method endpoints-method-{entry.method.toLowerCase()}"
+                            title="{`${entry.method}${entry.path}`}"
+                        >
+                            {entry.method}
+                            {entry.path}
                         </li>
                     {/each}
                 </ul>
@@ -44,74 +51,76 @@
 </div>
 
 <style>
-    .endpoints {
-        text-overflow: ellipsis;
-        overflow: scroll;
-        white-space: nowrap;
-        width: 100%;
-        box-sizing: border-box;
-    }
+.endpoints {
+    text-overflow: ellipsis;
+    overflow: scroll;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-    ul {
-        margin-block-start: 0;
-        margin-block-end: 0;
-        padding-inline-start: 15px;
-    }
+ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 15px;
+}
 
-    .path {
-        margin-left: var(--XS-margin);
-    }
+.path {
+    margin-left: var(--XS-margin);
+}
 
-    .endpoints {
-        margin: var(--S-margin) 0;
-    }
+.endpoints {
+    margin: var(--S-margin) 0;
+}
 
-    .endpoints-title {
-        color: var(--main-white);
-    }
+.endpoints-title {
+    color: var(--main-white);
+}
 
-    .endpoints-list {
-        line-height: 20px;
-        list-style: none;
+.endpoints-list {
+    line-height: 20px;
+    list-style: none;
 
-        padding-inline-start: 0px;
-    }
+    padding-inline-start: 0px;
+}
 
-    .endpoints-methods {
-        list-style: none;
-        font-weight: bold;
-    }
+.endpoints-methods {
+    list-style: none;
+    font-weight: bold;
+}
 
-    .endpoints-method {
-        display: flex;
-        align-items: center;
+.endpoints-method {
+    width: 90%;
+    overflow: hidden;
 
-        margin-top: var(--XS-margin);
+    text-overflow: ellipsis;
 
-        cursor: pointer;
-    }
+    margin-top: var(--XS-margin);
 
-    .endpoints-method-get {
-        color: var(--main-cyan);
-    }
+    cursor: pointer;
+}
 
-    .endpoints-method-post {
-        color: var(--main-green);
-    }
+.endpoints-method-get {
+    color: var(--main-cyan);
+}
 
-    .endpoints-method-put {
-        color: var(--main-orange);
-    }
+.endpoints-method-post {
+    color: var(--main-green);
+}
 
-    .endpoints-method-delete {
-        color: var(--main-red);
-    }
+.endpoints-method-put {
+    color: var(--main-orange);
+}
 
-    .endpoints-method-admin {
-        color: var(--main-blue);
-    }
+.endpoints-method-delete {
+    color: var(--main-red);
+}
 
-    .endpoints-method-patch {
-        color: var(--main-yellow);
-    }
+.endpoints-method-admin {
+    color: var(--main-blue);
+}
+
+.endpoints-method-patch {
+    color: var(--main-yellow);
+}
 </style>
